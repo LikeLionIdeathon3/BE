@@ -97,13 +97,17 @@ public class ProductService {
         JsonNode firstRow = serviceNode.path("row").get(0);
         if (firstRow == null) return null;
 
+        // 반환된 제품명이 검색어를 포함하지 않으면 무관한 결과로 판단하고 무시
+        String productName = firstRow.path("PRDLST_NM").asText(null);
+        if (productName == null || !productName.contains(query)) return null;
+
         String fnclty = firstRow.path("FNCLTY_CNTNT").asText(null);
         if (fnclty != null && fnclty.length() > 200) {
             fnclty = fnclty.substring(0, 200) + "...";
         }
 
         return ProductData.builder()
-                .productName(firstRow.path("PRDLST_NM").asText(query))
+                .productName(productName)
                 .brand(firstRow.path("BSSH_NM").asText(null))
                 .category("건강기능식품")
                 .subCategory(firstRow.path("PRDLST_CD_NM").asText(null))
@@ -136,12 +140,16 @@ public class ProductService {
         JsonNode firstRow = serviceNode.path("row").get(0);
         if (firstRow == null) return null;
 
+        // 반환된 제품명이 검색어를 포함하지 않으면 무관한 결과로 판단하고 무시
+        String productName = firstRow.path("PRDLST_NM").asText(null);
+        if (productName == null || !productName.contains(query)) return null;
+
         String category = firstRow.path("PRDLST_DCNM").asText("일반식품");
         String subCategory = firstRow.path("PRDLST_CD_NM").asText(null);
         String warning = buildWarningMessage(category, subCategory);
 
         return ProductData.builder()
-                .productName(firstRow.path("PRDLST_NM").asText(query))
+                .productName(productName)
                 .brand(firstRow.path("BSSH_NM").asText(null))
                 .category(category)
                 .subCategory(subCategory)
