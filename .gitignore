@@ -1,0 +1,16 @@
+# 빌드 결과물
+target/
+*.jar
+*.war
+
+# IntelliJ 설정 파일
+.idea/
+*.iml
+
+# 환경변수 파일 (절대 올리면 안 됨)
+.env
+application-local.yml
+
+# OS 파일
+.DS_Store
+Thumbs.db

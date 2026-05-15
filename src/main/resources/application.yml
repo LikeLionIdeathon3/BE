@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:8080}
+
+# 식약처 Open API 설정
+foodsafety:
+  api:
+    key: ${FOODSAFETY_API_KEY}
+    base-url: http://openapi.foodsafetykorea.go.kr/api
+    # 건강기능식품 품목분류정보 서비스 코드
+    health-food-service: I2710
+    # 식품(첨가물) 품목제조보고 서비스 코드
+    general-food-service: I1250
